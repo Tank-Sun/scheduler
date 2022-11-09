@@ -10,11 +10,21 @@ const useApplicationData = () => {
   });
   
   const setDay = day => setState(prev => ({...prev, day}));
+
+  const updateDays = function(state, appointment_id) {
+    const filteredDay = state.days.filter(day => day.appointments.includes(appointment_id))[0];
+    const newSpots = filteredDay.appointments.filter(appointmentId => state.appointments[appointmentId].interview === null).length;
+    const newDay = {...filteredDay, spots: newSpots};
+    const newDayIndex = state.days.findIndex(day => day.id === filteredDay.id);
+    const newDays = [...state.days];
+    newDays[newDayIndex] = newDay;
+    return newDays;
+  };
   
   const bookInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview }
+      interview
     };
     const appointments = {
       ...state.appointments,
@@ -23,7 +33,13 @@ const useApplicationData = () => {
 
     return axios.put(`/api/appointments/${id}`, {interview})
       .then(() => {
-        setState({...state, appointments});
+        const newState = {...state, appointments};
+        setState(newState);
+        return newState;
+      })
+      .then((newState) => {
+        const newDays = updateDays(newState, id);
+        setState(prev => ({...prev, days: newDays}));
       });
   };
 
@@ -37,9 +53,16 @@ const useApplicationData = () => {
       [id]: appointment
     };
 
+
     return axios.delete(`/api/appointments/${id}`, {interview})
       .then(() => {
-        setState({...state, appointments});
+        const newState = {...state, appointments};
+        setState(newState);
+        return newState;
+      })
+      .then((newState) => {
+        const newDays = updateDays(newState, id);
+        setState(prev => ({...prev, days: newDays}));
       });
   };
 
