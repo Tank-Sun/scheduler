@@ -14,8 +14,7 @@ export function getInterview(state, interview) {
   let transformedInterview = null;
   if (interview) {
     const filteredInterviewer = state.interviewers[interview.interviewer];
-    transformedInterview = interview;
-    transformedInterview.interviewer = filteredInterviewer;
+    transformedInterview = {...interview, interviewer: filteredInterviewer};
   }
 
   return transformedInterview;
