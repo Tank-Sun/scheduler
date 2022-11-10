@@ -34,12 +34,8 @@ const useApplicationData = () => {
     return axios.put(`/api/appointments/${id}`, {interview})
       .then(() => {
         const newState = {...state, appointments};
-        setState(newState);
-        return newState;
-      })
-      .then((newState) => {
         const newDays = updateDays(newState, id);
-        setState(prev => ({...prev, days: newDays}));
+        setState({...newState, days: newDays});
       });
   };
 
@@ -57,12 +53,8 @@ const useApplicationData = () => {
     return axios.delete(`/api/appointments/${id}`, {interview})
       .then(() => {
         const newState = {...state, appointments};
-        setState(newState);
-        return newState;
-      })
-      .then((newState) => {
         const newDays = updateDays(newState, id);
-        setState(prev => ({...prev, days: newDays}));
+        setState({...newState, days: newDays});
       });
   };
 
