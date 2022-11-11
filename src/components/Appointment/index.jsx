@@ -77,7 +77,7 @@ const Appointment = function(props) {
       )}
       {mode === CONFIRM && (
         <Confirm
-          message={"Are you sure you would like to delete?"}
+          message={"Are you sure you would like to delete this appointment?"}
           onCancel={back}
           onConfirm={cancelAppointment}
         />
