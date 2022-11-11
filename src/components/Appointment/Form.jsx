@@ -9,17 +9,20 @@ const Form = function(props) {
   const [errorStudent, setErrorStudent] = useState("");
   const [errorInterviewer, setErrorInterviewer] = useState("");
 
+  // reset the states
   const reset = function() {
     setInterviewer(null);
     setStudent("");
     setErrorStudent("");
     setErrorInterviewer("");
   };
+
   const cancel = function() {
     reset();
     props.onCancel();
   };
 
+  // show error indicator and cannot save the appointment when the student name is empty or no interviewer is selected
   const save = function() {
     if (student === "") {
       setErrorStudent("Student name cannot be blank");

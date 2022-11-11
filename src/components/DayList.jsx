@@ -2,6 +2,8 @@ import React from "react";
 import DayListItem from "./DayListItem";
 
 const DayList = function(props) {
+
+  // creat the array of DayListItem components
   const days = props.days.map(day => {
     return (
       <DayListItem
@@ -13,6 +15,7 @@ const DayList = function(props) {
       />
     );
   });
+  
   return(
     <ul>
       {days}

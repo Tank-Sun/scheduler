@@ -7,6 +7,7 @@ import useApplicationData from "hooks/useApplicationData";
 
 export default function Application() {
 
+  // import functions from the custom hook useApplicationData
   const {
     state,
     setDay,
@@ -14,6 +15,7 @@ export default function Application() {
     cancelInterview
   } = useApplicationData();
 
+  // creat the array of Appointment components for selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
   const schedule = dailyAppointments.map(appointment => {
@@ -31,7 +33,7 @@ export default function Application() {
       );
     });
     
-
+  // return the JSX structure of Applicaiton component
   return (
     <main className="layout">
       <section className="sidebar">

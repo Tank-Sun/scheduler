@@ -22,8 +22,11 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 
 const Appointment = function(props) {
+
+  // set the default state depending on props.interview is null or not
   const { mode, transition, back } = useVisualMode(props.interview? SHOW: EMPTY);
 
+  // saving the appointment and transit to SHOW state after finishing the interaction with API server
   const saveAppointment = function(name, interviewer) {
     const interview = {
       student: name,
@@ -39,6 +42,7 @@ const Appointment = function(props) {
     transition(CONFIRM);
   };
 
+  // Deleting the appointment and transit to EMPTY state after finishing the interaction with API server
   const cancelAppointment = function() {
     const interview = null;
     transition(DELETING, true);
@@ -51,6 +55,7 @@ const Appointment = function(props) {
     transition(EDIT);
   };
 
+  // return different JSX syntex depending on mode
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time}/>

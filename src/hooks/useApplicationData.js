@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useApplicationData = () => {
+  // set default state
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -9,8 +10,10 @@ const useApplicationData = () => {
     interviewers: {}
   });
   
+  // set day to the selected day
   const setDay = day => setState(prev => ({...prev, day}));
 
+  // construct the needed days array
   const updateDays = function(state, appointment_id) {
     const filteredDay = state.days.filter(day => day.appointments.includes(appointment_id))[0];
     const newSpots = filteredDay.appointments.filter(appointmentId => state.appointments[appointmentId].interview === null).length;
@@ -21,6 +24,7 @@ const useApplicationData = () => {
     return newDays;
   };
   
+  // When booking an interview, send a put request to API server, then set the new state
   const bookInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -39,6 +43,7 @@ const useApplicationData = () => {
       });
   };
 
+  // When cancelling an interview, send a delete request to API server, then set the new state
   const cancelInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -49,7 +54,6 @@ const useApplicationData = () => {
       [id]: appointment
     };
 
-
     return axios.delete(`/api/appointments/${id}`, {interview})
       .then(() => {
         const newState = {...state, appointments};
@@ -58,6 +62,7 @@ const useApplicationData = () => {
       });
   };
 
+  // After getting all the needed data from API server, set the new state
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 
 const InterviewerList = function(props) {
+  // creat array of interiewers for each appointment
   const interviewers = props.interviewers.map(interviewer => {
     return (
       <InterviewerListItem
@@ -16,6 +17,7 @@ const InterviewerList = function(props) {
       />
     );
   });
+
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
@@ -24,6 +26,7 @@ const InterviewerList = function(props) {
   );
 }
 
+// test the type of props.interviewers passed to InterviewerList component must be array
 InterviewerList.propTypes = {interviewers: PropTypes.array.isRequired};
 
 export default InterviewerList;
