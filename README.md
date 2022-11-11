@@ -7,10 +7,15 @@ Through building this app, I practiced my skill of building front end by React, 
 
 ## Screenshots
 
+!["the defult page when the app firstly loaded"](https://github.com/Tank-Sun/scheduler/blob/master/docs/default-page.png?raw=true)
+!["the creat appointment form"](https://github.com/Tank-Sun/scheduler/blob/master/docs/add-appointment.png?raw=true)
+!["the confirmation page before the appointment is deleted"](https://github.com/Tank-Sun/scheduler/blob/master/docs/delete-appointment.png?raw=true)
+!["the page showing after adding and deleting appointments, the remaing number of spots changes accordingly"](https://github.com/Tank-Sun/scheduler/blob/master/docs/after-add&delete-page.png?raw=true)
+
 
 ## Setup
 
-Install dependencies with `npm install`.
+Install dependencies with `npm install`
 
 ## Running Webpack Development Server
 
